@@ -48,6 +48,9 @@ export default function Home() {
       iconSize: [70, 70], // Size of the icon
     });
 
+    // global variable to store routing control (maybe to fix errors)
+    let routingControl = null;
+
     // tutorial for routing
     // https://www.youtube.com/watch?v=6mAdRdwZihc&ab_channel=GeoDev
 
@@ -73,7 +76,7 @@ export default function Home() {
       // Add a marker for animating along the route
       //var marker = L.marker([tofuCoords.lat, tofuCoords.lng]).addTo(map);
 
-      L.Routing.control({
+      routingControl = L.Routing.control({
         waypoints: [
           L.latLng(tofuCoords.lat, tofuCoords.lng), // Tofu's Trading
           L.latLng(sjsuCoords.lat, sjsuCoords.lng)   // SJSU
