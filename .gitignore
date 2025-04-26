@@ -25,7 +25,7 @@ frontend.pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
 frontend/.env*
-
+backend/.env*
 # vercel
 frontend/.vercel
 # typescript
