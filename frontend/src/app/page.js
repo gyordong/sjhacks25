@@ -14,8 +14,6 @@ import { useEffect, useState } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 
 
-
-
 // source code:
 // https://github.com/Leaflet/Leaflet.heat
 
