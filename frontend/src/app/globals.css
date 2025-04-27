@@ -24,3 +24,23 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Change text color and background for popups */
+.leaflet-popup-content {
+  color: black; /* Black text */
+  background-color: white; /* White background */
+  padding: 10px; /* Optional: Add padding for better spacing */
+}
+
+/* Change text color and background for routing instructions */
+.leaflet-routing-container {
+  color: black; /* Black text */
+  background-color: white; /* White background */
+  border: 1px solid #ccc; /* Optional: Add a border */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  padding: 10px; /* Optional: Add padding */
+}
+
+@theme {
+  --color-placeholder: #507DBC;
+}
