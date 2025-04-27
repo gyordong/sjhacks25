@@ -84,13 +84,11 @@ export default function Home() {
       }).on('routesfound', function (e) {
         var routes = e.routes;
         console.log(routes);
-
         e.routes[0].coordinates.forEach(function (coord, index) {
           setTimeout(function () {
             marker.setLatLng([coord.lat, coord.lng]);
           }, 100 * index)
         })
-
       }).addTo(map);
     });
 
@@ -123,7 +121,6 @@ export default function Home() {
       <nav className="bg-white border-b-1 border-gray-300 w-full h-15 flex items-center justify-left pl-10">
         <h1 className="text-gray-700 text-2xl font-mono font-semibold">OnePeace</h1>
       </nav>
-
       <div id="map" style={{ 
                       height: "calc(100vh - 60px)", 
                       width: "100%",
