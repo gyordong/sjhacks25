@@ -37,9 +37,9 @@ export default function Home() {
       position: "topright", // Options: 'topleft', 'topright', 'bottomleft', 'bottomright'
     }).addTo(map);
 
-    // Add OpenStreetMap tile layer
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    // Add MapTiler Streets v2 tile layer
+    L.tileLayer('https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=19f3H5XGe8Eqr6lEje2H', {
+      attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> contributors'
     }).addTo(map);
 
     // Define the custom taxi icon (PLACE HOLDER!!!!!)
