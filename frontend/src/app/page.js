@@ -1,5 +1,6 @@
 "use client"; // this makes it a Client Component
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { RiArrowLeftLine, RiArrowRightLine } from "react-icons/ri";
@@ -11,6 +12,8 @@ import "leaflet-routing-machine";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+
+
 
 
 // source code:
@@ -133,101 +136,68 @@ export default function Home() {
                     }}
       ></div>
 
-      <div className="flex flex-row w-full mt-5 relative">
-        <div 
-          className="transition-all duration-500 ease-in-out flex"
-          style={{ 
-            width: isCollapsed ? '40px' : '33.333%',
-            transform: isCollapsed ? 'translateX(-100%)' : 'translateX(0)',
-            marginLeft: isCollapsed ? '40px' : '',
-            position: "absolute",
-            top: 0,
-            zIndex: 1000, // Ensure the sidebar is above the map
-            height: "100vh", // Full height of the viewport
+{/* Sidebar (card) */}
+<div className="fixed top-[140px] left-0 z-10">
+        <div
+          className={"transition-all duration-500 ease-in-out bg-white shadow-lg rounded-r-3xl p-5 flex flex-col items-center"}
+          style={{
+            width: isCollapsed ? "60px" : "450px",
+            height: isCollapsed ? "55px" : "auto",
+            transform: isCollapsed ? "translateX(-100%) translateX(60px)" : "translateX(0)",
+            boxShadow: "5px 0px 10px rgba(0, 0, 0, 0.2)",
+            overflow: "visible",
           }}
         >
+          {/* Collapse Button */}
           <div
-              className={`relative bg-white border-b-1 border-gray-300 shadow-lg rounded-r-3xl p-5 w-full flex flex-col items-center bg-transparent-50 transition-all duration-500 ease-in-out ${
-                isCollapsed ? "" : "min-w-[240px]"
-              }`}
-              style={{ boxShadow: "5px 0px 10px rgba(0, 0, 0, 0.2)" }}
-            >
-            <div
-              className="p-1 ml-auto rounded-4xl hover-shadow cursor-pointer transition-all duration-500 ease-in-out"
-              style={{
-                backgroundColor: "rgb(80, 125, 188)",
-                transform: isCollapsed ? "translateX(0px)" : "translateX(40px)",
-              }}
-              onClick={toggleCollapse}
-            >
-              {isCollapsed ? (
-                <RiArrowRightLine
-                  className="text-3xl transition-all duration-500"
-                  style={{ color: "rgb(218, 227, 229)" }}
-                />
-              ) : (
-                <RiArrowLeftLine
-                  className="text-3xl transition-all duration-500"
-                  style={{ color: "rgb(218, 227, 229)" }}
-                />
-              )}
-            </div>
-
-            {/* Only show inputs if NOT collapsed */}
-            {!isCollapsed && (
-              <div className="w-full space-y-2">
-                <input
-                  type="text"
-                  placeholder="Enter Starting Location"
-                  className="placeholder:text-placeholder text-black w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <HiOutlineDotsVertical className="size-5" style={{ color: "rgb(80, 125, 188)" }}/>
-                <input
-                  type="text"
-                  placeholder="Enter your Destination"
-                  className="placeholder:text-placeholder text-black w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+            className="p-1 rounded-4xl hover-shadow cursor-pointer transition-all duration-500 ease-in-out absolute top-2 right-2"
+            style={{
+              backgroundColor: "rgb(80, 125, 188)",
+              zIndex: 20,
+              translate: isCollapsed ? "0px" : "25px",
+            }}
+            onClick={toggleCollapse}
+          >
+            {isCollapsed ? (
+              <RiArrowRightLine className="text-3xl" style={{ color: "rgb(218, 227, 229)" }} />
+            ) : (
+              <RiArrowLeftLine className="text-3xl" style={{ color: "rgb(218, 227, 229)" }} />
             )}
-            <div className="flex flex-row items-center justify-center mt-5">
-            <div
-              className="p-1 rounded-4xl hover-shadow transition-shadow duration-300 ease-in-out flex items-center justify-center"
-              style={{ backgroundColor: "rgb(80, 125, 188)" }}
-            >
-              <RiArrowLeftLine
-                className="text-3xl"
-                style={{ color: "rgb(218, 227, 229)" }}
-              />
-            </div>
+          </div>
 
-            <div
-              className="p-1 rounded-4xl hover-shadow transition-shadow duration-300 ease-in-out flex items-center justify-center"
-              style={{ backgroundColor: "rgb(80, 125, 188)" }}
-            >
-              <RiArrowLeftLine
-                className="text-3xl"
-                style={{ color: "rgb(218, 227, 229)" }}
-              />
-            </div>
+          {/* Inputs and content */}
+          <div
+            className={`w-full space-y-1 mt-2 px-4 ${isCollapsed ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}
+          >
+            <input
+              type="text"
+              placeholder="Enter Starting Location"
+              className="placeholder:text-placeholder text-black w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <HiOutlineDotsVertical className="size-5 mx-auto ml-0" style={{ color: "rgb(80, 125, 188)" }} />
+            <input
+              type="text"
+              placeholder="Enter your Destination"
+              className="placeholder:text-placeholder text-black w-full h-10 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-            <div
-              className="p-1 rounded-4xl hover-shadow transition-shadow duration-300 ease-in-out flex items-center justify-center"
-              style={{ backgroundColor: "rgb(80, 125, 188)" }}
-            >
-              <RiArrowLeftLine
-                className="text-3xl"
-                style={{ color: "rgb(218, 227, 229)" }}
-              />
-            </div>
-            </div>
+          {/* Footer buttons */}
+          <div
+            className={`flex flex-row items-center justify-center mt-5 space-x-3 ${isCollapsed ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}
+          >
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="p-1 rounded-4xl hover-shadow transition-shadow duration-300 ease-in-out flex items-center justify-center"
+                style={{ backgroundColor: "rgb(80, 125, 188)" }}
+              >
+                <RiArrowLeftLine className="text-3xl" style={{ color: "rgb(218, 227, 229)" }} />
+              </div>
+            ))}
           </div>
         </div>
-        
-        <div 
-          className={`absolute left-0 transition-all duration-500 ease-in-out ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}
-        >
-          </div>
-        </div>
+      </div>
     </div>
-  );
+  )
 }
